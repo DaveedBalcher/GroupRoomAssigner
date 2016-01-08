@@ -10,7 +10,6 @@ import UIKit
 
 class ParticipantTableViewCell: UITableViewCell {
     
-    
     var participant: Participant? {
         didSet {
             updateUI()
@@ -31,7 +30,9 @@ class ParticipantTableViewCell: UITableViewCell {
         }
     }
     
+    
 
+    
 //    override func awakeFromNib() {
 //        super.awakeFromNib()
 //        // Initialization code

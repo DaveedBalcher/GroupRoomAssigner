@@ -24,7 +24,7 @@ class Participant
     var flightInfo: String?
     
     var present = false
-    var previousRoommate = [Int]()
+    var previousRoommate = [Participant]()
     
     enum Gender { case male, female, other }
     

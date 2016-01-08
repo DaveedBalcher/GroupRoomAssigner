@@ -24,7 +24,7 @@ class LoadViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        CSVTextView.delegate = self
+//        CSVTextView.delegate = self
 
         appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate
         managedContext = appDelegate!.managedObjectContext!
@@ -37,65 +37,68 @@ class LoadViewController: UIViewController, UITextViewDelegate {
     }
 
 
-    // MARK: - TextView
-
-    func textViewDidBeginEditing(textView: UITextView) {
-        textView.text = ""
-    }
-    
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n"
-        {
-            textView.resignFirstResponder()
-            return false
-        }
-        return true
-    }
+//    // MARK: - TextView
+//
+//    func textViewDidBeginEditing(textView: UITextView) {
+//        textView.text = ""
+//    }
+//    
+//    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+//        if text == "\n"
+//        {
+//            textView.resignFirstResponder()
+//            return false
+//        }
+//        return true
+//    }
     
     
     // MARK: Save To CoreData
     
-    func textViewDidEndEditing(textView: UITextView) {
+    @IBAction func loadPasteboardToCoreData() {
         
-        let inputText = textView.text
-        if inputText != "" {
-            let newLineIndecators = NSCharacterSet.newlineCharacterSet()
-            let arrayOfLines = inputText.componentsSeparatedByCharactersInSet(newLineIndecators) as [String]
+//        let inputText = textView.text
+        
+        let pasteboardString:String? = UIPasteboard.generalPasteboard().string
+        if let inputText = pasteboardString {
             
-            for line in arrayOfLines {
+            if inputText != "" {
+                let newText = inputText.stringByReplacingOccurrencesOfString("\t", withString: ",")
+                let newLineIndecators = NSCharacterSet.newlineCharacterSet()
+                let arrayOfLines = newText.componentsSeparatedByCharactersInSet(newLineIndecators) as [String]
                 
-                
-                if count(line) > 10 {
-                
-                    let cellData = line.componentsSeparatedByString(",")
+                for line in arrayOfLines {
                     
-                    //2
-                    let entity =  NSEntityDescription.entityForName("Participant", inManagedObjectContext: managedContext!)
-                    
-                    let participant = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
-                    
-                    //3
-                    participant.setValue(saveInt(cellData, index: 0), forKey: "number")
-                    participant.setValue(saveString(cellData, index: 1), forKey: "firstName")
-                    participant.setValue(saveString(cellData, index: 2), forKey: "lastName")
-                    participant.setValue(saveString(cellData, index: 3), forKey: "gender")
-                    participant.setValue(saveString(cellData, index: 4), forKey: "email")
-                    participant.setValue(saveString(cellData, index: 5), forKey: "phone")
-                    participant.setValue(saveString(cellData, index: 6), forKey: "state")
-                    participant.setValue(saveString(cellData, index: 7), forKey: "previouslyAcquainted")
-                    participant.setValue(saveInt(cellData, index: 8), forKey: "age")
-                    participant.setValue(saveString(cellData, index: 9), forKey: "medicalInfo")
-                    participant.setValue(saveString(cellData, index: 10), forKey: "deitaryInfo")
-                    participant.setValue(saveString(cellData, index: 11), forKey: "flightInfo")
-                    
-                    //4
-                    var error: NSError?
-                    if !managedContext!.save(&error) {
-                        println("Could not save \(error), \(error?.userInfo)")
+                    if arrayOfLines.count > 1 {
+                        
+                        let cellData = line.componentsSeparatedByString(",")
+                        
+                        let entity =  NSEntityDescription.entityForName("Participant", inManagedObjectContext: managedContext!)
+                        
+                        let participant = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
+                        
+                        participant.setValue(saveInt(cellData, index: 0), forKey: "number")
+                        participant.setValue(saveString(cellData, index: 1), forKey: "firstName")
+                        participant.setValue(saveString(cellData, index: 2), forKey: "lastName")
+                        participant.setValue(saveString(cellData, index: 3), forKey: "gender")
+                        participant.setValue(saveString(cellData, index: 4), forKey: "email")
+                        participant.setValue(saveString(cellData, index: 5), forKey: "phone")
+                        participant.setValue(saveString(cellData, index: 6), forKey: "state")
+                        participant.setValue(saveString(cellData, index: 7), forKey: "previouslyAcquainted")
+                        participant.setValue(saveInt(cellData, index: 8), forKey: "age")
+                        participant.setValue(saveString(cellData, index: 9), forKey: "medicalInfo")
+                        participant.setValue(saveString(cellData, index: 10), forKey: "deitaryInfo")
+                        participant.setValue(saveString(cellData, index: 11), forKey: "flightInfo")
+                        
+                        do {
+                            try managedContext!.save()
+                            savedParticipantList.append(participant)
+                        } catch let error as NSError {
+                            print("Could not save \(error), \(error.userInfo)")
+                        }
                     }
-                    //5
-                    savedParticipantList.append(participant)
                 }
+                performSegueWithIdentifier("show roster", sender: nil)
             }
         }
     }
@@ -110,7 +113,7 @@ class LoadViewController: UIViewController, UITextViewDelegate {
     
     func saveInt(strings: [String], index: Int) -> Int {
         if strings.count > index {
-            if let int = strings[index].toInt() {
+            if let int: Int = Int(strings[index]) {
                 return int
             }
         }
@@ -122,20 +125,14 @@ class LoadViewController: UIViewController, UITextViewDelegate {
     
     func loadParticipants() -> [Participant]? {
         
-        //2
         let fetchRequest = NSFetchRequest(entityName:"Participant")
         
-        //3
-        var error: NSError?
-        
-        let fetchedResults =
-        managedContext!.executeFetchRequest(fetchRequest,
-            error: &error) as? [NSManagedObject]
-        
-        if let results = fetchedResults {
-            return getParticipants(results)
-        } else {
-            println("Could not fetch \(error), \(error!.userInfo)")
+        do {
+            let results = try managedContext!.executeFetchRequest(fetchRequest)
+            let resultingObjects = results as! [NSManagedObject]
+            return getParticipants(resultingObjects)
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
         }
         return nil
     }
@@ -155,7 +152,9 @@ class LoadViewController: UIViewController, UITextViewDelegate {
             let medicalInfo = getString(object.valueForKey("medicalInfo") as? String)
             let dietaryInfo = getString(object.valueForKey("deitaryInfo") as? String)
             let flightInfo = getString(object.valueForKey("flightInfo") as? String)
-            participants.append(Participant(number: number, first: firstName, last: lastName, gender: gender, email: email, phone: phone, state: state, previouslyAcquainted: previouslyAcquainted, age: age, medicalInfo: medicalInfo, dietaryInfo: dietaryInfo, flightInfo: flightInfo))
+            if number != 0 {
+                participants.append(Participant(number: number, first: firstName, last: lastName, gender: gender, email: email, phone: phone, state: state, previouslyAcquainted: previouslyAcquainted, age: age, medicalInfo: medicalInfo, dietaryInfo: dietaryInfo, flightInfo: flightInfo))
+            }
         }
         return participants
     }
@@ -192,7 +191,7 @@ class LoadViewController: UIViewController, UITextViewDelegate {
         if let pa = string {
             let parts = pa.componentsSeparatedByString(";")
             for part in parts {
-                if let number = part.toInt() {
+                if let number = Int(part) {
                     participantByNumbers.append(number)
                 }
             }
@@ -201,26 +200,24 @@ class LoadViewController: UIViewController, UITextViewDelegate {
     }
     
     func clearCoreData() {
-
-        //2
-        let fetchRequest = NSFetchRequest(entityName:"Participant")
         
-        //3
-        var error: NSError?
+        let fetchRequest = NSFetchRequest(entityName: "Participant")
         
-        let fetchedResults =
-        managedContext!.executeFetchRequest(fetchRequest,
-            error: &error) as? [NSManagedObject]
-        
-        if let results = fetchedResults {
-            for result in results {
-                managedContext!.deleteObject(result)
+        do {
+            let fetchedEntities = try self.managedContext!.executeFetchRequest(fetchRequest) as! [NSManagedObject]
+            
+            for entity in fetchedEntities {
+                self.managedContext!.deleteObject(entity)
             }
-        } else {
-            println("Could not fetch \(error), \(error!.userInfo)")
+        } catch let error as NSError {
+            print("Could not delete \(error), \(error.userInfo)")
         }
-
-        managedContext!.save(nil)
+        
+        do {
+            try self.managedContext!.save()
+        } catch let error as NSError {
+            print("Could not delete \(error), \(error.userInfo)")
+        }
     }
     
     
@@ -238,20 +235,15 @@ class LoadViewController: UIViewController, UITextViewDelegate {
                 }
             default: break
             }
-            
         }
-
     }
     
     @IBAction func returnFromPVC(segue: UIStoryboardSegue) {
-        CSVTextView.text = ""
+//        CSVTextView.text = ""
         
         if shouldClearData {
             clearCoreData()
         }
-        
     }
-
-
 }
 

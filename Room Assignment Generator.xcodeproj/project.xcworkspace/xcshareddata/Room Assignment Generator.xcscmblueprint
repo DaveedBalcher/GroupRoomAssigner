@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "220298B01FFD2D8A3FEE6A72CCB5BCD787578E27",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "E28BE05AC21056BF7BCACA2728053545A9C63959" : 0,
+    "220298B01FFD2D8A3FEE6A72CCB5BCD787578E27" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4912DDFD-2668-46B1-9590-69A775C75F8B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "E28BE05AC21056BF7BCACA2728053545A9C63959" : "",
+    "220298B01FFD2D8A3FEE6A72CCB5BCD787578E27" : "TaglitRoomAssigner\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Room Assignment Generator",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Room Assignment Generator.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/DavidBalcher\/TaglitRoomAssigner.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "220298B01FFD2D8A3FEE6A72CCB5BCD787578E27"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/DavidBalcher\/LiptonForPA-PayPal.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E28BE05AC21056BF7BCACA2728053545A9C63959"
+    }
+  ]
+}
