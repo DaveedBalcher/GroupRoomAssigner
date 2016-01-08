@@ -30,7 +30,8 @@ class ParticipantViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBAction func scrollToSection(sender: UIButton) {
         if let buttonName = sender.currentTitle {
-            if let visibleRows = rosterTableView.indexPathsForVisibleRows() as? [NSIndexPath] {
+            if rosterTableView.indexPathsForVisibleRows != nil {
+                let visibleRows = rosterTableView.indexPathsForVisibleRows! as [NSIndexPath]
                 let currentIndex = visibleRows[0].row
                 var newIndex = currentIndex
                 let numOfRowOnPage = visibleRows.count - 1
@@ -85,7 +86,7 @@ class ParticipantViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     @IBAction func segueToLoadViewController(sender: UIBarButtonItem) {
-        var alert = UIAlertController(title: "Load Participants", message: "Choose between adding participant information to your current list or starting from scratch", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let alert = UIAlertController(title: "Load Participants", message: "Choose between adding participant information to your current list or starting from scratch", preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         alert.addAction(UIAlertAction(title: "Add", style: .Default, handler: { (UIAlertAction) -> Void in
             self.performSegueWithIdentifier("show load participants", sender: false)

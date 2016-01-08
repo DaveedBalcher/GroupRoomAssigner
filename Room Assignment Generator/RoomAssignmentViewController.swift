@@ -16,18 +16,21 @@ class RoomAssignmentViewController: UIViewController, UITableViewDelegate, UITab
     var roomAssignments = [Assignment]()
     var participants: [Participant]?
     
-    var altNumber = 0
+    var alterateAssignment = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        allRoomAssignments = Assignment.assign(participants!)
+        let assignment = RoomAssignment()
+        allRoomAssignments = assignment.assign(participants!)
         roomAssignments = allRoomAssignments[0]
+        
+        assignmentTableView.rowHeight = 66.0
     }
     
     @IBAction func changedAlternateAssignment(sender: UISegmentedControl) {
-        altNumber = sender.selectedSegmentIndex
-        roomAssignments = allRoomAssignments[altNumber]
+        alterateAssignment = sender.selectedSegmentIndex
+        roomAssignments = allRoomAssignments[alterateAssignment]
         assignmentTableView.reloadData()
     }
 
@@ -48,17 +51,17 @@ class RoomAssignmentViewController: UIViewController, UITableViewDelegate, UITab
     
     private struct Storyboard {
         static let DoubleRoomIdentifier = "double room"
+        static let TripleRoomIdentifier = "triple room"
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.DoubleRoomIdentifier, forIndexPath: indexPath) as! RoomAssignmentTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.TripleRoomIdentifier, forIndexPath: indexPath) as! TripleRoomAssignmentTableViewCell
         
         // Configure Cell
         cell.assignment = roomAssignments[indexPath.row]
         
         return cell
     }
-
     
     
     

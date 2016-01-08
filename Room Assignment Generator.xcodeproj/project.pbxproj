@@ -16,12 +16,15 @@
 		433D1BFA1B54ACB800B67CA6 /* ParticipantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D1BF91B54ACB800B67CA6 /* ParticipantViewController.swift */; };
 		433D1BFC1B54AD5400B67CA6 /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D1BFB1B54AD5400B67CA6 /* Participant.swift */; };
 		433D1BFE1B54B39C00B67CA6 /* ParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D1BFD1B54B39C00B67CA6 /* ParticipantTableViewCell.swift */; };
+		436D57C71B8A243A00DEFB07 /* RoomAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436D57C61B8A243A00DEFB07 /* RoomAssignment.swift */; };
+		43726B0B1C3F616100028557 /* NewParticipantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43726B0A1C3F616100028557 /* NewParticipantViewController.swift */; };
 		438EAA691B651DCB0049A55F /* ParticipantInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438EAA681B651DCB0049A55F /* ParticipantInfoTableViewCell.swift */; };
 		43A93B371B5865FA00C2F70A /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A93B361B5865FA00C2F70A /* LoadViewController.swift */; };
 		43CECD981B5612FC003DC56C /* RoomAssignmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CECD971B5612FC003DC56C /* RoomAssignmentTableViewCell.swift */; };
 		43CECD9A1B561461003DC56C /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CECD991B561461003DC56C /* Assignment.swift */; };
 		43CECD9C1B56158A003DC56C /* RoomAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CECD9B1B56158A003DC56C /* RoomAssignmentViewController.swift */; };
 		43ECC1121B64188500306480 /* ParticipantInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ECC1111B64188500306480 /* ParticipantInfoViewController.swift */; };
+		43FF38181BA1E76F00285985 /* TripleRoomAssignmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FF38171BA1E76F00285985 /* TripleRoomAssignmentTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,12 +51,15 @@
 		433D1BF91B54ACB800B67CA6 /* ParticipantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantViewController.swift; sourceTree = "<group>"; };
 		433D1BFB1B54AD5400B67CA6 /* Participant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
 		433D1BFD1B54B39C00B67CA6 /* ParticipantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantTableViewCell.swift; sourceTree = "<group>"; };
+		436D57C61B8A243A00DEFB07 /* RoomAssignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomAssignment.swift; sourceTree = "<group>"; };
+		43726B0A1C3F616100028557 /* NewParticipantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewParticipantViewController.swift; sourceTree = "<group>"; };
 		438EAA681B651DCB0049A55F /* ParticipantInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantInfoTableViewCell.swift; sourceTree = "<group>"; };
 		43A93B361B5865FA00C2F70A /* LoadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadViewController.swift; sourceTree = "<group>"; };
 		43CECD971B5612FC003DC56C /* RoomAssignmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomAssignmentTableViewCell.swift; sourceTree = "<group>"; };
 		43CECD991B561461003DC56C /* Assignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
 		43CECD9B1B56158A003DC56C /* RoomAssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomAssignmentViewController.swift; sourceTree = "<group>"; };
 		43ECC1111B64188500306480 /* ParticipantInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantInfoViewController.swift; sourceTree = "<group>"; };
+		43FF38171BA1E76F00285985 /* TripleRoomAssignmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripleRoomAssignmentTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +105,12 @@
 				433D1BF91B54ACB800B67CA6 /* ParticipantViewController.swift */,
 				43CECD9B1B56158A003DC56C /* RoomAssignmentViewController.swift */,
 				43ECC1111B64188500306480 /* ParticipantInfoViewController.swift */,
+				43726B0A1C3F616100028557 /* NewParticipantViewController.swift */,
 				434468511B63CE0D005F43FD /* TableViewCells */,
 				433D1BDB1B54A74500B67CA6 /* Main.storyboard */,
 				433D1BFB1B54AD5400B67CA6 /* Participant.swift */,
 				43CECD991B561461003DC56C /* Assignment.swift */,
+				436D57C61B8A243A00DEFB07 /* RoomAssignment.swift */,
 				433D1BE01B54A74500B67CA6 /* LaunchScreen.xib */,
 				433D1BD51B54A74500B67CA6 /* Supporting Files */,
 			);
@@ -143,6 +151,7 @@
 			children = (
 				433D1BFD1B54B39C00B67CA6 /* ParticipantTableViewCell.swift */,
 				43CECD971B5612FC003DC56C /* RoomAssignmentTableViewCell.swift */,
+				43FF38171BA1E76F00285985 /* TripleRoomAssignmentTableViewCell.swift */,
 				438EAA681B651DCB0049A55F /* ParticipantInfoTableViewCell.swift */,
 			);
 			name = TableViewCells;
@@ -192,11 +201,14 @@
 		433D1BCA1B54A74500B67CA6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastSwiftMigration = 0710;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Xpressive;
 				TargetAttributes = {
 					433D1BD11B54A74500B67CA6 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = L4NZ727S2F;
 					};
 					433D1BE61B54A74500B67CA6 = {
 						CreatedOnToolsVersion = 6.4;
@@ -249,15 +261,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				43ECC1121B64188500306480 /* ParticipantInfoViewController.swift in Sources */,
+				436D57C71B8A243A00DEFB07 /* RoomAssignment.swift in Sources */,
 				43A93B371B5865FA00C2F70A /* LoadViewController.swift in Sources */,
 				43CECD9A1B561461003DC56C /* Assignment.swift in Sources */,
 				43CECD981B5612FC003DC56C /* RoomAssignmentTableViewCell.swift in Sources */,
+				43726B0B1C3F616100028557 /* NewParticipantViewController.swift in Sources */,
 				438EAA691B651DCB0049A55F /* ParticipantInfoTableViewCell.swift in Sources */,
 				433D1BD81B54A74500B67CA6 /* AppDelegate.swift in Sources */,
 				430F3AD21B62750C0076AD28 /* ParticipantModel.xcdatamodeld in Sources */,
 				43CECD9C1B56158A003DC56C /* RoomAssignmentViewController.swift in Sources */,
 				433D1BFA1B54ACB800B67CA6 /* ParticipantViewController.swift in Sources */,
 				433D1BFC1B54AD5400B67CA6 /* Participant.swift in Sources */,
+				43FF38181BA1E76F00285985 /* TripleRoomAssignmentTableViewCell.swift in Sources */,
 				433D1BFE1B54B39C00B67CA6 /* ParticipantTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,6 +336,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -342,6 +358,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USE_HEADERMAP = YES;
 			};
 			name = Debug;
 		};
@@ -379,6 +396,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USE_HEADERMAP = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -387,9 +405,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Room Assignment Generator/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.XpressiveInstruments.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -397,9 +420,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Room Assignment Generator/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.XpressiveInstruments.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -407,16 +435,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Room Assignment GeneratorTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.XpressiveInstruments.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Room Assignment Generator.app/Room Assignment Generator";
 			};
@@ -426,12 +452,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Room Assignment GeneratorTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.XpressiveInstruments.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Room Assignment Generator.app/Room Assignment Generator";
 			};
