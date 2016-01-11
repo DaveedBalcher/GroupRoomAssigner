@@ -17,9 +17,9 @@
 		433D1BFC1B54AD5400B67CA6 /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D1BFB1B54AD5400B67CA6 /* Participant.swift */; };
 		433D1BFE1B54B39C00B67CA6 /* ParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D1BFD1B54B39C00B67CA6 /* ParticipantTableViewCell.swift */; };
 		436D57C71B8A243A00DEFB07 /* RoomAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436D57C61B8A243A00DEFB07 /* RoomAssignment.swift */; };
-		43726B0B1C3F616100028557 /* NewParticipantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43726B0A1C3F616100028557 /* NewParticipantViewController.swift */; };
 		438EAA691B651DCB0049A55F /* ParticipantInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438EAA681B651DCB0049A55F /* ParticipantInfoTableViewCell.swift */; };
 		43A93B371B5865FA00C2F70A /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A93B361B5865FA00C2F70A /* LoadViewController.swift */; };
+		43B027221C43422300C61930 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B027211C43422300C61930 /* MessageUI.framework */; };
 		43CECD981B5612FC003DC56C /* RoomAssignmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CECD971B5612FC003DC56C /* RoomAssignmentTableViewCell.swift */; };
 		43CECD9A1B561461003DC56C /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CECD991B561461003DC56C /* Assignment.swift */; };
 		43CECD9C1B56158A003DC56C /* RoomAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CECD9B1B56158A003DC56C /* RoomAssignmentViewController.swift */; };
@@ -52,9 +52,9 @@
 		433D1BFB1B54AD5400B67CA6 /* Participant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
 		433D1BFD1B54B39C00B67CA6 /* ParticipantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantTableViewCell.swift; sourceTree = "<group>"; };
 		436D57C61B8A243A00DEFB07 /* RoomAssignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomAssignment.swift; sourceTree = "<group>"; };
-		43726B0A1C3F616100028557 /* NewParticipantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewParticipantViewController.swift; sourceTree = "<group>"; };
 		438EAA681B651DCB0049A55F /* ParticipantInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantInfoTableViewCell.swift; sourceTree = "<group>"; };
 		43A93B361B5865FA00C2F70A /* LoadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadViewController.swift; sourceTree = "<group>"; };
+		43B027211C43422300C61930 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		43CECD971B5612FC003DC56C /* RoomAssignmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomAssignmentTableViewCell.swift; sourceTree = "<group>"; };
 		43CECD991B561461003DC56C /* Assignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
 		43CECD9B1B56158A003DC56C /* RoomAssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomAssignmentViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43B027221C43422300C61930 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +84,7 @@
 		433D1BC91B54A74500B67CA6 = {
 			isa = PBXGroup;
 			children = (
+				43B027211C43422300C61930 /* MessageUI.framework */,
 				433D1BD41B54A74500B67CA6 /* RoomAssignmentGenerator */,
 				433D1BEA1B54A74500B67CA6 /* Room Assignment GeneratorTests */,
 				433D1BD31B54A74500B67CA6 /* Products */,
@@ -105,7 +107,6 @@
 				433D1BF91B54ACB800B67CA6 /* ParticipantViewController.swift */,
 				43CECD9B1B56158A003DC56C /* RoomAssignmentViewController.swift */,
 				43ECC1111B64188500306480 /* ParticipantInfoViewController.swift */,
-				43726B0A1C3F616100028557 /* NewParticipantViewController.swift */,
 				434468511B63CE0D005F43FD /* TableViewCells */,
 				433D1BDB1B54A74500B67CA6 /* Main.storyboard */,
 				433D1BFB1B54AD5400B67CA6 /* Participant.swift */,
@@ -265,7 +266,6 @@
 				43A93B371B5865FA00C2F70A /* LoadViewController.swift in Sources */,
 				43CECD9A1B561461003DC56C /* Assignment.swift in Sources */,
 				43CECD981B5612FC003DC56C /* RoomAssignmentTableViewCell.swift in Sources */,
-				43726B0B1C3F616100028557 /* NewParticipantViewController.swift in Sources */,
 				438EAA691B651DCB0049A55F /* ParticipantInfoTableViewCell.swift in Sources */,
 				433D1BD81B54A74500B67CA6 /* AppDelegate.swift in Sources */,
 				430F3AD21B62750C0076AD28 /* ParticipantModel.xcdatamodeld in Sources */,

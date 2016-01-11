@@ -8,23 +8,22 @@
 
 import UIKit
 import CoreData
+import MessageUI
 
-class LoadViewController: UIViewController, UITextViewDelegate {
+class LoadViewController: UIViewController, UITextViewDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate {
     
-    @IBOutlet weak var CSVTextView: UITextView!
+    @IBOutlet weak var emailTextField: UITextField!
     
     var savedParticipantList = [NSManagedObject]()
     var shouldClearData = false
     
-    //1
     var appDelegate: AppDelegate?
     var managedContext: NSManagedObjectContext?
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        CSVTextView.delegate = self
+        self.emailTextField.delegate = self
 
         appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate
         managedContext = appDelegate!.managedObjectContext!
@@ -35,32 +34,84 @@ class LoadViewController: UIViewController, UITextViewDelegate {
             }
         }
     }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    @IBAction func openSpreadsheetInSafari() {
+        UIApplication.sharedApplication().openURL(NSURL(string: "https://drive.google.com/previewtemplate?id=1cAkl6Nh6TogfcHg0x-fBs3kM4l8k_sswDfyVkUQRC0Q&mode=public")!)
+    }
+    
+    
+    // Send email with setup info
+    
+    var userEmail = [""]
 
-
-//    // MARK: - TextView
-//
-//    func textViewDidBeginEditing(textView: UITextView) {
-//        textView.text = ""
-//    }
-//    
-//    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-//        if text == "\n"
-//        {
-//            textView.resignFirstResponder()
-//            return false
-//        }
-//        return true
-//    }
+    @IBAction func setAndSendEmail(sender: UITextField) {
+        if let enteredEmail = sender.text {
+            userEmail[0] = enteredEmail
+        }
+        
+        let mailComposeViewController = configuredMailComposeViewController()
+        
+        if MFMailComposeViewController.canSendMail() {
+            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            self.showSendMailErrorAlert()
+        }
+    }
+    
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposeVC = MFMailComposeViewController()
+        mailComposeVC.mailComposeDelegate = self
+        mailComposeVC.setToRecipients(userEmail)
+        mailComposeVC.setSubject("Taglit Group Assigner Setup")
+        mailComposeVC.setMessageBody("Hey Taglit Staffer,<br><br>Click <a href=\"https://drive.google.com/previewtemplate?id=1cAkl6Nh6TogfcHg0x-fBs3kM4l8k_sswDfyVkUQRC0Q&mode=public\">here</a> to start filling out your Taglit group's information on Google Sheets. Once you have collected and recorded all the information from your participants, open the sheet on your iOS device. Then select only the rows and columns with participant information, including  the column of numbers. Copy and return to the Room Assigner App to paste. <br><br>Please feel free to send any feedback to <a href=\"mailto:David@XpressiveInstruments.com\">David@XpressiveInstruments.com</a>.<br><br>Best,<br>David", isHTML: true)
+        
+        return mailComposeVC
+    }
+    
+    func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Looks like there is an error. Check your devices email configuration and try again.", delegate: self, cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    
+    let demoDatabase = "1\tCarly\tFishman\tfemale\tcarlyfishman@gmail.com\t(603) 452-7845\tNew York\tDavid Fishman\t25\tn/a\tn/a\tAmerican #5378 - 6:34 am\n" +
+    "2\tJenna\tHartz\tfemale\tjennahartz@gmail.com\t(732) 543-4587\tNew Jersey\tn/a\t23\tHydrocodone\tn/a\tDriving\n" +
+    "3\tMelissa\tDale\tfemale\tmelissadale@gmail.com\t(708) 428-8917\tMichigan\tEva Sender\t25\tn/a\tVegetarian\tAmerican #4537 - 12:15 am\n" +
+    "4\tChelsea\tNelson\tfemale\tchelseanelson@gmail.com\t(818) 541-4578\tCalifornia\tn/a\t22\tn/a\tn/a\tTrain\n" +
+    "5\tRachel\tRowe\tfemale\trachelrowe@gmail.com\t(914) 145-4965\tIllinois\tn/a\t24\tPenicillin\tGluten free\tDriving\n" +
+    "6\tEva\tSender\tfemale\tesender@gmail.com\t(206) 375-7856\tWashington\tMelissa Dale\t23\tn/a\tKosher\tDriving\n" +
+    "7\tMatthew\tAppelbaum\tmale\tnoahappelbaum@gmail.com\t(773) 348-6895\tCalifornia\tn/a\t26\tFlonase\tVeganFlying two days in advance\n" +
+    "8\tSimon\tKramer\tmale\tsimonkramer@gmail.com\t(603) 678-2758\tNew Hampshire\tn/a\t25\tAdderall\tn/a\tDriving\n" +
+    "9\tMichael\tMarcus\tmale\tmikemarcus@gmail.com\t(718) 245-6983\tNew York\tn/a\t26\tn/a\tn/a\tDriving\n" +
+    "10\tDavid\tFishman\tmale\tdavidfishman@gmail.com\t(845) 784-1423\tNew York\tCarly Fishman\t24\tn/a\tn/a\tTrain\n" +
+    "11\tJonathon\tShapiro\tmale\tjonshapiro@gmail.com\t(502) 748-7895\tIndiana\tn/a\t27\tn/a\tLactose Intolerant\tFlying two days in advance\n" +
+    "12\tPhilip\tWeinberg\tmale\tphilipweinberg@gmail.com\t(401) 443-2457\tNew York\tn/a\t27\tAmoxicillin\tn/a\tDriving"
     
     
     // MARK: Save To CoreData
     
-    @IBAction func loadPasteboardToCoreData() {
+    @IBAction func loadToCoreData(sender: UIButton) {
         
-//        let inputText = textView.text
+        let commandString = sender.titleLabel?.text
+        var databaseString:String? = nil
         
-        let pasteboardString:String? = UIPasteboard.generalPasteboard().string
-        if let inputText = pasteboardString {
+        if commandString == "Get Participant Info from Clipboard" {
+            databaseString = UIPasteboard.generalPasteboard().string
+        } else if commandString == "Load a Demo Trip Roster" {
+            databaseString = demoDatabase
+        }
+        
+        if let inputText = databaseString {
             
             if inputText != "" {
                 let newText = inputText.stringByReplacingOccurrencesOfString("\t", withString: ",")

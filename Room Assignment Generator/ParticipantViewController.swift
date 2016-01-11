@@ -134,7 +134,6 @@ class ParticipantViewController: UIViewController, UITableViewDelegate, UITableV
                             pivc.currentParticipant = participants[indexPath.row]
                             pivc.participants = participants
                         }
-                        
                 }
             default: break
             }

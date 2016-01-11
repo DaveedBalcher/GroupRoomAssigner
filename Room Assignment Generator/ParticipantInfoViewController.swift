@@ -54,27 +54,12 @@ class ParticipantInfoViewController: UIViewController, UITableViewDataSource, UI
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as! ParticipantInfoTableViewCell
         
-        cell.detailTextView.editable = editMode
         cell.participant = currentParticipant
         cell.participants = participants
         cell.information = indexPath.row
         
         return cell
     }
-    
-    private var editMode = true
-    
-//    @IBAction func editParticipant(sender: AnyObject) {
-//        editMode = !editMode
-//        self.participantInfoTableView.reloadData()
-//    }
-
-    
-    
-    
-//    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-//    
-//    }
 
     /*
     // MARK: - Navigation
