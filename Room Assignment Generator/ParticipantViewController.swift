@@ -12,13 +12,16 @@ class ParticipantViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var rosterTableView: UITableView!
     @IBOutlet weak var loadBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var roomBarButtonItem: UIBarButtonItem!
   
     var participants = [Participant]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
+        rosterTableView.contentInset.top = 12.0
     }
+
 
     @IBAction func clearChecks() {
         for par in participants {
@@ -86,32 +89,50 @@ class ParticipantViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     @IBAction func segueToLoadViewController(sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Load Participants", message: "Choose between adding participant information to your current list or starting from scratch", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        
-        alert.addAction(UIAlertAction(title: "Add", style: .Default, handler: { (UIAlertAction) -> Void in
+        if participants.count != 0 {
+            let alert = UIAlertController(title: "Load Participants", message: "Choose between adding participant information to your current list or starting from scratch", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            
+            alert.addAction(UIAlertAction(title: "Add", style: .Default, handler: { (UIAlertAction) -> Void in
+                self.performSegueWithIdentifier("show load participants", sender: false)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Clear", style: .Destructive, handler: { (UIAlertAction) -> Void in
+                self.performSegueWithIdentifier("show load participants", sender: true)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (UIAlertAction) -> Void in
+            }))
+            
+            alert.modalPresentationStyle = .Popover
+            let ppc = alert.popoverPresentationController
+            ppc?.barButtonItem = loadBarButtonItem
+            
+            presentViewController(alert, animated: true, completion: nil)
+        } else {
             self.performSegueWithIdentifier("show load participants", sender: false)
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Clear", style: .Destructive, handler: { (UIAlertAction) -> Void in
-            self.performSegueWithIdentifier("show load participants", sender: true)
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (UIAlertAction) -> Void in
-        }))
-        
-        alert.modalPresentationStyle = .Popover
-        let ppc = alert.popoverPresentationController
-        ppc?.barButtonItem = loadBarButtonItem
-//        ppc?.delegate = self
-//        ppc?.sourceView = loadBarButtonItem
-
-
-        presentViewController(alert, animated: true, completion: nil)
+        }
     }
     
     
     // MARK: - Navigation
 
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if identifier == "show room assignments" {
+            if  participants.count == 0 {
+                let alert = UIAlertController(title: "Warning", message: "Load your Birthright group's info to enable room assignment generation", preferredStyle: UIAlertControllerStyle.ActionSheet)
+                
+                alert.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: { (UIAlertAction) -> Void in
+                }))
+                
+                alert.modalPresentationStyle = .Popover
+                presentViewController(alert, animated: true, completion: nil)
+                return false
+            }
+        }
+        return true
+    }
+    
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let identifier = segue.identifier {

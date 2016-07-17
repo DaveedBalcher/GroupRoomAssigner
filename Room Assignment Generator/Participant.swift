@@ -17,18 +17,22 @@ class Participant
     let email: String?
     let phone: String?
     let state: String?
-    var previouslyAcquainted: [Int]?
+    var previouslyAcquainted: String?
     var age: Int
     var medicalInfo: String?
     var dietaryInfo: String?
     var flightInfo: String?
+    
+    var fullName: String {
+        return "\(firstName) \(lastName)"
+    }
     
     var present = false
     var previousRoommate = [Participant]()
     
     enum Gender { case male, female, other }
     
-    init(number: Int, first: String, last: String, gender: Gender, email: String?, phone: String?, state: String?, previouslyAcquainted: [Int]?, age: Int, medicalInfo: String?, dietaryInfo:String?, flightInfo: String?) {
+    init(number: Int, first: String, last: String, gender: Gender, email: String?, phone: String?, state: String?, previouslyAcquainted: String?, age: Int, medicalInfo: String?, dietaryInfo:String?, flightInfo: String?) {
         self.number = number
         self.firstName = first
         self.lastName = last
@@ -43,7 +47,7 @@ class Participant
         self.flightInfo = flightInfo
     }
     
-    convenience init (number: Int, first: String, last: String, gender: Gender, age: Int, previouslyAcquainted: [Int]?) {
+    convenience init (number: Int, first: String, last: String, gender: Gender, age: Int, previouslyAcquainted: String?) {
         self.init(number: number, first: first, last: last, gender: gender, email: nil, phone: nil, state: nil, previouslyAcquainted: previouslyAcquainted, age: age, medicalInfo: nil, dietaryInfo: nil, flightInfo: nil)
     }
     

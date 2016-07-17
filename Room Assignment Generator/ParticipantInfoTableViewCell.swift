@@ -72,14 +72,17 @@ class ParticipantInfoTableViewCell: UITableViewCell {
                         detailText = text
                     }
                 case 7:
-                    var previouslyAcquainted = ""
-                    if let pa = p.previouslyAcquainted {
-                        for partIndex in pa {
-                            let participant = participants![partIndex]
-                            previouslyAcquainted += participant.firstName + " " + participant.lastName + ", "
-                        }
+                    if let text = p.previouslyAcquainted {
+                        detailText = text
                     }
-                    detailText = previouslyAcquainted
+//                    var previouslyAcquainted = ""
+//                    if let pa = p.previouslyAcquainted {
+//                        for partIndex in pa {
+//                            let participant = participants![partIndex]
+//                            previouslyAcquainted += participant.firstName + " " + participant.lastName + ", "
+//                        }
+//                    }
+//                    detailText = previouslyAcquainted
                 case 8:
                     if let text = p.medicalInfo {
                         detailText = text

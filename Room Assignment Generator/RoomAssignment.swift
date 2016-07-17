@@ -45,12 +45,13 @@ class RoomAssignment {
             var participantsLeftPerGender = 0
             for mate in unassignedParticipants {
                 if mate.gender == keyHolder.gender {
-                    participantsLeftPerGender++
+                    participantsLeftPerGender += 1
                 }
             }
             switch participantsLeftPerGender {
                 case 0, 2:
-                roomAssignments.append(Assignment(roomNumber: roomNumber++, participant1: keyHolder, participant2: secondRoommate))
+                roomAssignments.append(Assignment(roomNumber: roomNumber, participant1: keyHolder, participant2: secondRoommate))
+                roomNumber += 1
                 participants[keyHolder.number-1].previousRoommate.append(secondRoommate)
                 participants[secondRoommate.number-1].previousRoommate.append(keyHolder)
                 
@@ -60,7 +61,8 @@ class RoomAssignment {
                 let thirdRoommate = unassignedParticipants[thirdMateIndex]
                 unassignedParticipants.removeAtIndex(thirdMateIndex)
                 
-                roomAssignments.append(Assignment(roomNumber: roomNumber++, participant1: keyHolder, participant2: secondRoommate, participant3: thirdRoommate))
+                roomAssignments.append(Assignment(roomNumber: roomNumber, participant1: keyHolder, participant2: secondRoommate, participant3: thirdRoommate))
+                roomNumber += 1
 
                 participants[keyHolder.number-1].previousRoommate.append(secondRoommate)
                 participants[keyHolder.number-1].previousRoommate.append(thirdRoommate)
@@ -79,7 +81,7 @@ class RoomAssignment {
         var newMateIndex = 0
         var previousCompatibility = 0
         var compatibility = 0
-        for var roommateIndex = 0; roommateIndex < participants.count; roommateIndex++ {
+        for roommateIndex in 0 ..< participants.count {
             let potentialRoommate = participants[roommateIndex]
             
             if let secondMate = secondRoommate {
@@ -107,13 +109,13 @@ class RoomAssignment {
         }
         
         // Check for previouslyAcquainted
-        if let previouslyAcquainted = secondRoommate.previouslyAcquainted {
-            for acquanted in previouslyAcquainted {
-                if keyHolder.number == acquanted {
-                    return 1
-                }
-            }
-        }
+//        if let previouslyAcquainted = secondRoommate.previouslyAcquainted {
+//            for acquanted in previouslyAcquainted {
+//                if keyHolder.number == acquanted {
+//                    return 2
+//                }
+//            }
+//        }
         
         // Check for previous roommate
         let previousRoommate = secondRoommate.previousRoommate
@@ -139,13 +141,13 @@ class RoomAssignment {
         }
         
         // Check for previously acquainted
-        if let previouslyAcquainted = thirdRoommate.previouslyAcquainted {
-            for acquanted in previouslyAcquainted {
-                if keyHolder.number == acquanted || secondRoommate.number == acquanted {
-                    return 1
-                }
-            }
-        }
+//        if let previouslyAcquainted = thirdRoommate.previouslyAcquainted {
+//            for acquanted in previouslyAcquainted {
+//                if keyHolder.number == acquanted || secondRoommate.number == acquanted {
+//                    return 2
+//                }
+//            }
+//        }
         
         // Check for previous roommate
         let previousRoommate = thirdRoommate.previousRoommate

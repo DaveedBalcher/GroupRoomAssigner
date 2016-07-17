@@ -19,6 +19,7 @@ class LoadViewController: UIViewController, UITextViewDelegate, MFMailComposeVie
     
     var appDelegate: AppDelegate?
     var managedContext: NSManagedObjectContext?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +69,7 @@ class LoadViewController: UIViewController, UITextViewDelegate, MFMailComposeVie
         mailComposeVC.mailComposeDelegate = self
         mailComposeVC.setToRecipients(userEmail)
         mailComposeVC.setSubject("Taglit Group Assigner Setup")
-        mailComposeVC.setMessageBody("Hey Taglit Staffer,<br><br>Click <a href=\"https://drive.google.com/previewtemplate?id=1cAkl6Nh6TogfcHg0x-fBs3kM4l8k_sswDfyVkUQRC0Q&mode=public\">here</a> to start filling out your Taglit group's information on Google Sheets. Once you have collected and recorded all the information from your participants, open the sheet on your iOS device. Then select only the rows and columns with participant information, including  the column of numbers. Copy and return to the Room Assigner App to paste. <br><br>Please feel free to send any feedback to <a href=\"mailto:David@XpressiveInstruments.com\">David@XpressiveInstruments.com</a>.<br><br>Best,<br>David", isHTML: true)
+        mailComposeVC.setMessageBody("Hey Taglit Staffer,<br><br>Thank you for trying out my Birthright Room Assignment App. Start by opening the provided Google Sheets template and replacing the demo roster with your Taglit group's information. Once you have collected and recorded all the information from your participants, open the sheet on your iOS device. Then select only the rows and columns with participant information, including the column of numbers, excluding the column labels. Copy and return to the Room Assigner App to paste. Click <a href=\"https://drive.google.com/previewtemplate?id=1cAkl6Nh6TogfcHg0x-fBs3kM4l8k_sswDfyVkUQRC0Q&mode=public\">HERE</a> for the template.<br><br>Please feel free to send any feedback to <a href=\"mailto:David@XpressiveInstruments.com\">David@XpressiveInstruments.com</a>.<br><br>Best,<br>David", isHTML: true)
         
         return mailComposeVC
     }
@@ -105,7 +106,7 @@ class LoadViewController: UIViewController, UITextViewDelegate, MFMailComposeVie
         let commandString = sender.titleLabel?.text
         var databaseString:String? = nil
         
-        if commandString == "Get Participant Info from Clipboard" {
+        if commandString == "4. Paste into Room Assignment iPhone App   " {
             databaseString = UIPasteboard.generalPasteboard().string
         } else if commandString == "Load a Demo Trip Roster" {
             databaseString = demoDatabase
@@ -114,15 +115,17 @@ class LoadViewController: UIViewController, UITextViewDelegate, MFMailComposeVie
         if let inputText = databaseString {
             
             if inputText != "" {
-                let newText = inputText.stringByReplacingOccurrencesOfString("\t", withString: ",")
+//                let newText = inputText.stringByReplacingOccurrencesOfString("\t", withString: ",")
                 let newLineIndecators = NSCharacterSet.newlineCharacterSet()
-                let arrayOfLines = newText.componentsSeparatedByCharactersInSet(newLineIndecators) as [String]
+//                let arrayOfLines = newText.componentsSeparatedByCharactersInSet(newLineIndecators) as [String]
+                let arrayOfLines = inputText.componentsSeparatedByCharactersInSet(newLineIndecators) as [String]
                 
                 for line in arrayOfLines {
                     
                     if arrayOfLines.count > 1 {
-                        
-                        let cellData = line.componentsSeparatedByString(",")
+//                      
+//                        let cellData = line.componentsSeparatedByString(",")
+                        let cellData = line.componentsSeparatedByString("\t")
                         
                         let entity =  NSEntityDescription.entityForName("Participant", inManagedObjectContext: managedContext!)
                         
@@ -131,7 +134,7 @@ class LoadViewController: UIViewController, UITextViewDelegate, MFMailComposeVie
                         participant.setValue(saveInt(cellData, index: 0), forKey: "number")
                         participant.setValue(saveString(cellData, index: 1), forKey: "firstName")
                         participant.setValue(saveString(cellData, index: 2), forKey: "lastName")
-                        participant.setValue(saveString(cellData, index: 3), forKey: "gender")
+                        participant.setValue(saveString(cellData, index: 3).lowercaseString, forKey: "gender")
                         participant.setValue(saveString(cellData, index: 4), forKey: "email")
                         participant.setValue(saveString(cellData, index: 5), forKey: "phone")
                         participant.setValue(saveString(cellData, index: 6), forKey: "state")
@@ -198,7 +201,7 @@ class LoadViewController: UIViewController, UITextViewDelegate, MFMailComposeVie
             let email = getString(object.valueForKey("email") as? String)
             let phone = getString(object.valueForKey("phone") as? String)
             let state = getString(object.valueForKey("state") as? String)
-            let previouslyAcquainted = getPreviouslyAcquainted(object.valueForKey("state") as? String)
+            let previouslyAcquainted = getString(object.valueForKey("previouslyAcquainted") as? String)
             let age = getInt(object.valueForKey("age") as? Int)
             let medicalInfo = getString(object.valueForKey("medicalInfo") as? String)
             let dietaryInfo = getString(object.valueForKey("deitaryInfo") as? String)
@@ -207,6 +210,36 @@ class LoadViewController: UIViewController, UITextViewDelegate, MFMailComposeVie
                 participants.append(Participant(number: number, first: firstName, last: lastName, gender: gender, email: email, phone: phone, state: state, previouslyAcquainted: previouslyAcquainted, age: age, medicalInfo: medicalInfo, dietaryInfo: dietaryInfo, flightInfo: flightInfo))
             }
         }
+        
+//        // Find Previously Acquainted Participants
+//        for (index, object) in results.enumerate() {
+//            let previousAcquainted = getString(object.valueForKey("previouslyAcquainted") as? String)
+//            if previousAcquainted != "" || previousAcquainted != "N/A" {
+//                var acquaints: [String]!
+//                if previousAcquainted.containsString(",") {
+//                    acquaints = previousAcquainted.componentsSeparatedByString(",")
+//                } else if previousAcquainted.containsString(";") {
+//                    acquaints = previousAcquainted.componentsSeparatedByString(";")
+//                }
+//                for acquaint in acquaints {
+//                    for par in participants {
+//                        var matchingAcquaint = acquaint 
+//                        if matchingAcquaint[0] == " " {
+//                            matchingAcquaint = String(matchingAcquaint.characters.dropFirst())
+//                        }
+//                        if let last = matchingAcquaint.characters.last {
+//                            if last == " " {
+//                                matchingAcquaint = String(matchingAcquaint.characters.dropLast())
+//                            }
+//                        }
+//                        if acquaint == par.firstName + " " + par.lastName {
+//                            participants[index].previouslyAcquainted?.append(par.number - 1)
+//                        }
+//                    }
+//                }
+//            }
+//        }
+        
         return participants
     }
     
@@ -237,18 +270,18 @@ class LoadViewController: UIViewController, UITextViewDelegate, MFMailComposeVie
         return Participant.Gender.other
     }
     
-    func getPreviouslyAcquainted(string: String?) -> [Int] {
-        var participantByNumbers = [Int]()
-        if let pa = string {
-            let parts = pa.componentsSeparatedByString(";")
-            for part in parts {
-                if let number = Int(part) {
-                    participantByNumbers.append(number)
-                }
-            }
-        }
-        return participantByNumbers
-    }
+//    func getPreviouslyAcquainted(string: String?) -> [Int] {
+//        var participantByNumbers = [Int]()
+//        if let pa = string {
+//            let parts = pa.componentsSeparatedByString(";")
+//            for part in parts {
+//                if let number = Int(part) {
+//                    participantByNumbers.append(number)
+//                }
+//            }
+//        }
+//        return participantByNumbers
+//    }
     
     func clearCoreData() {
         
@@ -294,7 +327,26 @@ class LoadViewController: UIViewController, UITextViewDelegate, MFMailComposeVie
         
         if shouldClearData {
             clearCoreData()
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.removeObjectForKey("assignments")
         }
     }
 }
 
+
+extension String {
+    
+    subscript (i: Int) -> Character {
+        return self[self.startIndex.advancedBy(i)]
+    }
+    
+    subscript (i: Int) -> String {
+        return String(self[i] as Character)
+    }
+    
+    subscript (r: Range<Int>) -> String {
+        let start = startIndex.advancedBy(r.startIndex)
+        let end = start.advancedBy(r.endIndex - r.startIndex)
+        return self[Range(start ..< end)]
+    }
+}

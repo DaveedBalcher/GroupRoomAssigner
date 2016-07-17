@@ -16,8 +16,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+//        if let navigationController = window?.rootViewController as? MainNavController {
+//            navigationController.participantCount = countParticipants()
+//        }
+        
+//        let nav = self.window?.rootViewController as! MainNavController
+//        nav.participantCount = countParticipants()
+        
+        
+//        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+//        if countParticipants() > 0 {
+        
+//            let lvc = nav.viewControllers[0] as! LoadViewController
+//            lvc.performSegueWithIdentifier("show roster", sender: nil)
+//            
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            storyboard.instantiateViewControllerWithIdentifier("NavigationController") as! UINavigationController
+//            let pvc = storyboard.instantiateViewControllerWithIdentifier("ParticipantViewController") as! ParticipantViewController
+//            nvc.viewControllers = [pvc]
+//        }
+//        self.window?.makeKeyAndVisible()
+        
         // Override point for customization after application launch.
         return true
+    }
+    
+    func countParticipants() -> Int {
+        
+        let fetchRequest = NSFetchRequest(entityName:"Participant")
+        
+        do {
+            let results = try managedObjectContext!.executeFetchRequest(fetchRequest)
+            let resultingObjects = results as! [NSManagedObject]
+            return resultingObjects.count
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        return 0
     }
 
     func applicationWillResignActive(application: UIApplication) {

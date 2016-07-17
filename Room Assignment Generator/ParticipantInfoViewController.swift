@@ -24,9 +24,9 @@ class ParticipantInfoViewController: UIViewController, UITableViewDataSource, UI
         participantInfoTableView.estimatedRowHeight = 100
         
         // Display an Edit button in the navigation bar for this view controller
-         self.navigationItem.rightBarButtonItem = self.editButtonItem()
+//         self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: "tap:")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ParticipantInfoViewController.tap(_:)))
         view.addGestureRecognizer(tapGesture)
 
     }
