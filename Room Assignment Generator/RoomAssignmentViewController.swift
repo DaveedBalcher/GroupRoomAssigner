@@ -175,11 +175,11 @@ class RoomAssignmentViewController: UIViewController, UITableViewDelegate, UITab
         func configuredMailComposeViewController() -> MFMailComposeViewController {
             let emailController = MFMailComposeViewController()
             emailController.mailComposeDelegate = self
-            emailController.setSubject("CSV File")
+            emailController.setSubject("Exported Room Assignments")
             emailController.setMessageBody("", isHTML: false)
             
             // Attaching the .CSV file to the email.
-            emailController.addAttachmentData(data!, mimeType: "text/csv", fileName: "Sample.csv")
+            emailController.addAttachmentData(data!, mimeType: "text/csv", fileName: "Taglit_Room_Assignments.csv")
             
             return emailController
         }
